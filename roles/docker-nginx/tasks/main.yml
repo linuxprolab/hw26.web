@@ -1,0 +1,22 @@
+---
+# tasks file for nginx
+- name: Creates directory for nginx role 
+  file:
+    path: /home/vagrant/nginx
+    state: directory
+
+- name: Copy nginx configs
+  copy: src={{item.src}} dest={{item.dest}}
+  loop:
+    - {src: 'http.conf', dest: '/home/vagrant/nginx/http.conf'}
+    - {src: 'cert.crt', dest: '/home/vagrant/nginx/cert.crt'}
+    - {src: 'cert.key', dest: '/home/vagrant/nginx/cert.key'}
+    - {src: 'docker-compose.yml', dest: '/home/vagrant/nginx/docker-compose.yml'}
+
+- name: reset ssh connection 
+  meta: reset_connection
+
+- name: Run container
+  shell:
+    chdir: /home/vagrant/nginx
+    cmd: "docker-compose -f docker-compose.yml up -d"

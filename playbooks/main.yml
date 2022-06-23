@@ -1,0 +1,13 @@
+---
+
+- name: 'Provision web hosts'
+  hosts: web
+  gather_facts: true
+  become: true
+  roles:
+    - common
+    - docker-host
+    - docker-db
+    - docker-cache
+    - docker-ctfd
+    - docker-nginx
