@@ -6,10 +6,9 @@
     repo: https://github.com/CTFd/CTFd.git
     dest: /home/vagrant/CTFd
   ignore_errors: yes
-- name: Copy nginx configs
-  copy: src={{item.src}} dest={{item.dest}}
-  loop:
-    - {src: 'CTFd/docker-compose.yml', dest: '/home/vagrant/CTFd/docker-compose.yml'}
+  
+- name: Copy role files # Копируем файлы роли на хост 
+  copy: src=CTFd dest=/home/vagrant
 
 - name: reset ssh connection 
   meta: reset_connection

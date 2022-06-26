@@ -1,15 +1,7 @@
 ---
 # tasks file for nginx
-- name: Creates directory for nginx role 
-  file:
-    path: /home/vagrant/nginx
-    state: directory
-
-- name: Copy nginx configs
-  copy: src={{item.src}} dest={{item.dest}}
-  loop:
-    - {src: 'http.conf', dest: '/home/vagrant/nginx/http.conf'}
-    - {src: 'docker-compose.yml', dest: '/home/vagrant/nginx/docker-compose.yml'}
+- name: Copy role files # Копируем файлы роли на хост 
+  copy: src=nginx dest=/home/vagrant
 
 - name: reset ssh connection 
   meta: reset_connection
