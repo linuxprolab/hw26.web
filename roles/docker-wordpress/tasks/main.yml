@@ -1,0 +1,12 @@
+---
+# tasks file for wordpress
+- name: Copy role files # Копируем файлы роли на хост 
+  copy: src=wordpress dest=/home/vagrant
+
+- name: reset ssh connection 
+  meta: reset_connection
+
+- name: Run container
+  shell:
+    chdir: /home/vagrant/wordpress
+    cmd: "docker-compose -f docker-compose.yml up -d"

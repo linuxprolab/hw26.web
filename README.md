@@ -1,14 +1,14 @@
-# Домашнее задание 26. Развертывание web-приложения CTFd.
-В качестве web-приложения выбрано CTFd https://ctfd.io/.
-## Структура web-приложения.
-Web-приложение состоит из следующих компонент-ролей:
-- nginx
-- CTFd
-- db
-- cache
-
-Все компоненты запускаются на одной vagrant VM в докер-контейнерах.
-
+# Домашнее задание 26. Развертывание web-приложения.
+Будем разворачивать nginx + php(wordpress) + python (CTFd) + js(nodejs);
+## Структура стенда
+Все компоненты запускаются на одной vagrant VM в докер-контейнерах с помощью Docker-compose.
+- Ansible-роли:
+  - common - установка необходимых пакетов на ОС
+  - docker-host - установка пакетов Docker и Docker-compose
+  - docker-nginx - разворачивание докер-контейнера nginx
+  - docker-ctfd - разворачивание web-приложения CTFd докер-контейнерах
+  - docker-node - разворачивание web-приложения на nodejs
+  - docker-wordpress - разворачивание wordpress
 ## Запуск и проверка
 - Клонируем репозиторий:
 ```
@@ -23,9 +23,6 @@ vagrant up
 ```
 ansible-playbook playbooks/main.yml -i inventories/all.yml 
 ```
-
-- На локальном хосте добаляем в файл `/etc/hosts` строку:
-```
-127.0.0.1 webapp
-```
-- На локальном хосте открываем в браузере URL `https://webapp:8443/`.
+- CTFd доступен по локальном хосте по URL `https://localhost:8081/`.
+- nodejs доступен по локальном хосте по URL `https://localhost:8081/`.
+- Wordpress доступен по локальном хосте по URL `https://localhost:8083/`.

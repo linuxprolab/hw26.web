@@ -9,6 +9,7 @@ services:
       - ./cert.crt:/etc/nginx/cert.crt
       - ./cert.key:/etc/nginx/cert.key
       - .data/nginx/logs:/var/log/nginx/
+      - ../wordpress/wordpress:/var/www/html
     network_mode: host
 
 

@@ -1,0 +1,22 @@
+---
+# tasks file for nodejs
+- name: Creates directory for node role 
+  file:
+    path: /home/vagrant/node
+    state: directory
+    owner: vagrant
+    group: vagrant
+    mode: '0770'
+- name: Copy node files 
+  copy: src={{item.src}} dest={{item.dest}}
+  loop:
+    - {src: 'test.js', dest: '/home/vagrant/node/test.js'}
+    - {src: 'docker-compose.yml', dest: '/home/vagrant/node/docker-compose.yml'}
+
+- name: reset ssh connection 
+  meta: reset_connection
+
+- name: Run container
+  shell:
+    chdir: /home/vagrant/node
+    cmd: "docker-compose -f docker-compose.yml up -d"

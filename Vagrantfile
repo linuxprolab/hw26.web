@@ -12,7 +12,10 @@ MACHINES = {
     ],
     :ports => [
       {guest: 22, host: 22001, id: 'ssh'}, 
-      {guest: 8443, host: 8443}, 
+      {guest: 8081, host: 8081}, 
+      {guest: 8082, host: 8082}, 
+      {guest: 8083, host: 8083}, 
+      {guest: 9000, host: 9000}, 
     ],
   },
 }

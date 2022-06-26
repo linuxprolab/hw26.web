@@ -1,0 +1,48 @@
+version: '3.3'
+services:
+  database:
+    image: mysql:8.0
+    container_name: database
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      # So you don't have to use root, but you can if you like
+      #MYSQL_USER: 'user'
+      # You can use whatever password you like
+      #MYSQL_PASSWORD: 'password'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      # ports:
+      #   # <Port exposed> : < MySQL Port running inside container>
+      #   - '3306:3306'
+      # expose:
+      #   # Opens port 3306 on the container #   - '3306'
+      #   # Where our data will be persisted
+    volumes:
+      - ./dbdata:/var/lib/mysql
+    command: '--default-authentication-plugin=mysql_native_password'
+    networks:
+      - app-network
+
+
+  wordpress:
+    image: wordpress:5.1.1-fpm-alpine
+    container_name: wordpress
+    restart: unless-stopped
+    environment:
+      WORDPRESS_DB_HOST: database
+      WORDPRESS_DB_NAME: "${DB_NAME}" # Также импортируем переменные из .env
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: "${DB_ROOT_PASSWORD}"
+    volumes:
+      - ./wordpress:/var/www/html # сохраняем приложение на хост машине
+    ports:
+      - '9000:9000'
+    networks:
+      - app-network
+    depends_on:
+      - database # контейнер wordpress дождется запуска БД
+  
+networks:
+  app-network:
+    driver: bridge

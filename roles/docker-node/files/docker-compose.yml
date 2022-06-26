@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  node:
+    image: node:16.13.2-alpine3.15
+    container_name: node
+    working_dir: /opt/server # переназначим рабочую директорию для удобства
+    volumes:
+      - ./:/opt/server # пробрасываем приложение в директорию контейнера
+    command: node test.js # запуск приложения
+    network_mode: host

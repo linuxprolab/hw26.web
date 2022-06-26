@@ -1,20 +1,15 @@
 ---
 # tasks file for ctfd
-- name: Creates directory for ctfd role 
-  file:
-    path: /home/vagrant/CTFd
-    state: directory
     
 - name: Clone a CTFd repo
   ansible.builtin.git:
     repo: https://github.com/CTFd/CTFd.git
     dest: /home/vagrant/CTFd
   ignore_errors: yes
-
-- name: Copy db configs
+- name: Copy nginx configs
   copy: src={{item.src}} dest={{item.dest}}
   loop:
-    - {src: 'docker-compose.yml', dest: '/home/vagrant/CTFd/docker-compose.yml'}
+    - {src: 'CTFd/docker-compose.yml', dest: '/home/vagrant/CTFd/docker-compose.yml'}
 
 - name: reset ssh connection 
   meta: reset_connection

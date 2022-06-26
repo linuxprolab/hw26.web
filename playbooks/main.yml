@@ -7,7 +7,7 @@
   roles:
     - common
     - docker-host
-    - docker-db
-    - docker-cache
+    - docker-node
+    - docker-wordpress
     - docker-ctfd
     - docker-nginx
