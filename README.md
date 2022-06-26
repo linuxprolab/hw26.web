@@ -24,5 +24,5 @@ vagrant up
 ansible-playbook playbooks/main.yml -i inventories/all.yml 
 ```
 - CTFd доступен по локальном хосте по URL `http://localhost:8081/`.
-- nodejs доступен по локальном хосте по URL `http://localhost:8081/`.
+- nodejs доступен по локальном хосте по URL `http://localhost:8082/`.
 - Wordpress доступен по локальном хосте по URL `http://localhost:8083/`.
