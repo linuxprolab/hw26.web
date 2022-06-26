@@ -5,10 +5,10 @@
 - Ansible-роли:
   - common - установка необходимых пакетов на ОС
   - docker-host - установка пакетов Docker и Docker-compose
-  - docker-nginx - разворачивание докер-контейнера nginx
-  - docker-ctfd - разворачивание web-приложения CTFd докер-контейнерах
-  - docker-node - разворачивание web-приложения на nodejs
-  - docker-wordpress - разворачивание wordpress
+  - docker-nginx - развертывание докер-контейнера nginx
+  - docker-ctfd - развертывание web-приложения CTFd докер-контейнерах
+  - docker-node - развертывание web-приложения на nodejs
+  - docker-wordpress - развертывание wordpress в докер-контейнерах
 ## Запуск и проверка
 - Клонируем репозиторий:
 ```
@@ -23,6 +23,6 @@ vagrant up
 ```
 ansible-playbook playbooks/main.yml -i inventories/all.yml 
 ```
-- CTFd доступен по локальном хосте по URL `https://localhost:8081/`.
-- nodejs доступен по локальном хосте по URL `https://localhost:8081/`.
-- Wordpress доступен по локальном хосте по URL `https://localhost:8083/`.
+- CTFd доступен по локальном хосте по URL `http://localhost:8081/`.
+- nodejs доступен по локальном хосте по URL `http://localhost:8081/`.
+- Wordpress доступен по локальном хосте по URL `http://localhost:8083/`.
